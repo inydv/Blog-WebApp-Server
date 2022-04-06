@@ -13,24 +13,24 @@ function App() {
     <div className="App">
       <TopBar />
       <Switch>
-        <Route exact path="/" component={() => <Home />} />
-        <Route exact path="/post/:postId" component={() => <Single />} />
-        <Route
-          exact
-          path="/write"
-          component={user ? <Write /> : <Register />}
-        />
-        <Route
-          exact
-          path="/settings"
-          component={user ? <Settings /> : <Register />}
-        />
-        <Route exact path="/login" component={user ? <Home /> : <Login />} />
-        <Route
-          exact
-          path="/register"
-          component={user ? <Home /> : <Register />}
-        />
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/post/:postId">
+          <Single />
+        </Route>
+        <Route exact path="/write">
+          {user ? <Write /> : <Register />}
+        </Route>
+        <Route exact path="/settings">
+          {user ? <Settings /> : <Register />}
+        </Route>
+        <Route exact path="/login">
+          {user ? <Home /> : <Login />}
+        </Route>
+        <Route exact path="/register">
+          {user ? <Home /> : <Register />}
+        </Route>
       </Switch>
     </div>
   );
