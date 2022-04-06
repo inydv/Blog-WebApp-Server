@@ -8,7 +8,7 @@ import Write from "./pages/write/Write";
 import { Switch, Route } from "react-router-dom";
 
 function App() {
-  const user = true;
+  const user = false;
   return (
     <div className="App">
       <TopBar />
