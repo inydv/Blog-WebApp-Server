@@ -4,6 +4,8 @@ import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Singlepost() {
+  const PF = "http://localhost:5000/images/"
+
   const location = useLocation();
   const path = location.pathname.split("/")[2];
 
@@ -11,7 +13,7 @@ export default function Singlepost() {
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get("/post/" + path);
+      const res = await axios.get("/posts/" + path);
       setPost(res.data);
     };
     getPost();
@@ -20,7 +22,7 @@ export default function Singlepost() {
     <div className="singlePost">
       <div className="singlePostWrapper">
         {post.photo && (
-          <img src={post.photo} alt="" className="singlePostImg" />
+          <img src={PF + post.photo} alt="" className="singlePostImg" />
         )}
         <h1 className="singlePostTitle">
           {post.title}

@@ -1,9 +1,18 @@
 import "./topbar.css";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { signout } from "../../redux/apicall";
 
 export default function TopBar() {
-  const user = false;
+  const user = useSelector((state) => state.currentUser);
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    signout(dispatch);
+  };
+
   return (
     <div className="top">
       <div className="topLeft">
@@ -34,16 +43,14 @@ export default function TopBar() {
               WRITE
             </Link>
           </li>
-          <li className="topListItem">{user && "LOGOUT"}</li>
+          <li className="topListItem" onClick={handleLogout}>
+            {user && "LOGOUT"}
+          </li>
         </ul>
       </div>
       <div className="topRight">
         {user ? (
-          <img
-            className="topImg"
-            src="https://static.remove.bg/remove-bg-web/b27c50a4d669fdc13528397ba4bc5bd61725e4cc/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png"
-            alt=""
-          />
+          <img className="topImg" src={user.profilepic} alt="" />
         ) : (
           <ul className="topList">
             <li className="topListItem">
