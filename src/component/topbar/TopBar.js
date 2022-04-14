@@ -8,6 +8,7 @@ export default function TopBar() {
   const user = useSelector((state) => state.currentUser);
 
   const dispatch = useDispatch();
+  const PF = "http://localhost:5000/images";
 
   const handleLogout = () => {
     signout(dispatch);
@@ -50,7 +51,15 @@ export default function TopBar() {
       </div>
       <div className="topRight">
         {user ? (
-          <img className="topImg" src={user.profilepic} alt="" />
+          user.profilepic ? (
+            <Link to="/settings">
+              <img className="topImg" src={PF + user.profilepic} alt="" />
+            </Link>
+          ) : (
+            <Link to="/settings">
+              <i className="fa-solid fa-user" style={{ cursor: "pointer" }}></i>
+            </Link>
+          )
         ) : (
           <ul className="topList">
             <li className="topListItem">

@@ -80,3 +80,8 @@
   margin-top: 20px;
   cursor: pointer;
 }
+
+.settingsSubmit:disabled {
+  cursor: not-allowed;
+  color: teal;
+}

@@ -27,6 +27,7 @@ export default function Login() {
           type="text"
           placeholder="Enter your Username..."
           onChange={(e) => setUsername(e.target.value)}
+          required
         />
         <label>Password</label>
         <input
@@ -34,6 +35,7 @@ export default function Login() {
           type="password"
           placeholder="Enter your password..."
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
         <button className="loginButton" type="submit" disabled={isFetching}>
           Login
