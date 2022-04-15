@@ -11,6 +11,10 @@ export default function Home() {
   const { search } = useLocation();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const fetchPosts = async () => {
       const res = await axios.get("/posts" + search);
       setPosts(res.data);

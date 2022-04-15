@@ -6,6 +6,7 @@ export default function Contact() {
 
   useEffect(() => {
     setTF(true);
+    window.scrollTo(0, 0);
   }, []);
 
   const handleSubmit = (e) => {

@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./settings.css";
 import Sidebar from "../../component/sidebar/Sidebar";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { update } from "../../redux/apicall";
+import { signout } from "../../redux/apicall";
 
 export default function Settings() {
   const user = useSelector((state) => state.currentUser);
@@ -16,6 +17,10 @@ export default function Settings() {
   const PF = "http://localhost:5000/images";
 
   const { isFetching, error } = useSelector((state) => state);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,12 +43,23 @@ export default function Settings() {
     update(dispatch, { ...updatedUser });
   };
 
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`/user/${user._id}`, {
+        data: { userId: user._id },
+      });
+      signout(dispatch);
+    } catch (error) {}
+  };
+
   return (
     <div className="settings">
       <div className="settingsWrapper">
         <div className="settingsTitle">
           <span className="settingsUpdateTitle">Update Your Account</span>
-          <span className="settingsDeleteTitle">Delete Account</span>
+          <span className="settingsDeleteTitle" onClick={handleDelete}>
+            Delete Account
+          </span>
         </div>
         <form className="settingsForm" onSubmit={handleSubmit}>
           <label>Profile Picture</label>
