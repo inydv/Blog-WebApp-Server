@@ -7,6 +7,8 @@ import Single from "./pages/singlepage/Single";
 import Write from "./pages/write/Write";
 import { Switch, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
+import About from "./pages/about/About";
+import Contact from "./pages/contact/Contact";
 
 function App() {
   const user = useSelector((state) => state.currentUser);
@@ -31,6 +33,12 @@ function App() {
         </Route>
         <Route exact path="/register">
           {user ? <Home /> : <Register />}
+        </Route>
+        <Route exact path="/about">
+          <About />
+        </Route>
+        <Route exact path="/contact">
+          <Contact />
         </Route>
       </Switch>
     </div>

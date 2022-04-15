@@ -1,0 +1,118 @@
+.contact {
+  padding: 30px 100px;
+}
+
+.contact .title {
+  margin-bottom: 20px;
+}
+
+.contact .form .fieldForName {
+  border: 0;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.contact .form .fieldForName .nameLegend {
+  margin-bottom: 10px;
+}
+
+.contact .form .fieldForName .firstName {
+  margin-right: 10px;
+}
+
+.contact .form .fieldForName .firstName .firstNameLabel,
+.contact .form .fieldForName .lastName .lastNameLabel {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact .form .fieldForName .firstName .firstNameInput,
+.contact .form .fieldForName .lastName .lastNameInput {
+  padding: 10px;
+  margin-bottom: 5px;
+  width: 200px;
+  outline: 0;
+  color: black;
+}
+
+.contact .form .email,
+.contact .form .subject,
+.contact .form .message {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact .form .email .emailLabel,
+.contact .form .subject .subjectLabel,
+.contact .form .message .messageLabel {
+  margin-bottom: 10px;
+}
+
+.contact .form .email .emailInput,
+.contact .form .subject .subjectInput {
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 440px;
+  outline: 0;
+  color: black;
+}
+
+.contact .form .message .messageTextarea {
+  padding: 10px;
+  height: 100px;
+  width: 440px;
+  margin-bottom: 20px;
+  outline: 0;
+  color: black;
+}
+
+.contact .form .btn {
+  margin-bottom: 20px;
+}
+
+.contact .form .btn button {
+  padding: 15px 30px;
+  font-size: 25px;
+  border: 0;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 800px) {
+  .contact {
+    padding: 20px;
+  }
+
+  .contact .form .fieldForName {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact .form .fieldForName .nameLegend {
+    margin-bottom: 10px;
+  }
+
+  .contact .form .fieldForName .firstName .firstNameInput,
+  .contact .form .fieldForName .lastName .lastNameInput {
+    width: 240px;
+    margin: 10px 0;
+  }
+
+  .contact .form .email .emailInput,
+  .contact .form .subject .subjectInput {
+    margin-bottom: 10px;
+    width: 240px;
+  }
+
+  .contact .form .message .messageTextarea {
+    width: 240px;
+  }
+
+  .contact .form .btn {
+    margin-bottom: 10px;
+  }
+
+  .contact .form .btn button {
+    padding: 10px 20px;
+    font-size: 20px;
+  }
+}

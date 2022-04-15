@@ -1,0 +1,25 @@
+.about {
+    height: calc(100vh - 50px);
+    display: flex;
+    align-items: center;
+    background-color: #fdfbfb;
+}
+
+.about .imageContainer {
+    flex: 1;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+}
+
+.about .imageContainer img {
+    height: 100%;
+}
+
+.about .aboutContainer {
+    flex: 1;
+}
+
+.about .aboutContainer p {
+    font-size: 25px;
+}

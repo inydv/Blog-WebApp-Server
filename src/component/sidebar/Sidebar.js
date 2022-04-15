@@ -20,14 +20,14 @@ export default function Sidebar() {
         <span className="sidebarTitle">ABOUT ME</span>
         <img
           className="image"
-          src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"
+          src="https://www.boredpanda.com/blog/wp-content/uploads/2022/01/anime-characters-11-61deafe35fb99__700.jpg"
           alt=""
         />
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor
-          praesentium ipsa aut ipsam explicabo assumenda. Inventore, ex
-          quibusdam tenetur accusantium, neque nobis fugit consequatur eveniet
-          earum quam, maiores voluptate impedit.
+          Hello, I'm Lokesh Yadav <br /> A Full stack Developer <br />
+          Building quality websites and applications with HTML, CSS, and
+          JavaScript with Front-end Libraries React including Back-end Library
+          Node.js, Express.js and Database MongoDB.
         </p>
       </div>
       <div className="sidebarItem">
@@ -43,10 +43,27 @@ export default function Sidebar() {
       <div className="sidebarItem">
         <span className="sidebarTitle">FOLLOW US</span>
         <div className="sidebarSocial">
-          <i className="sidebarIcon fa-brands fa-facebook-square"></i>
-          <i className="sidebarIcon fa-brands fa-twitter-square"></i>
-          <i className="sidebarIcon fa-brands fa-pinterest-square"></i>
-          <i className="sidebarIcon fa-brands fa-instagram-square"></i>
+          <a
+            href="https://www.facebook.com/Nitin9900"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="sidebarIcon fa-brands fa-facebook-square"></i>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/lokesh-yadav-31318a225/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="sidebarIcon fa-brands fa-linkedin"></i>
+          </a>
+          <a
+            href="https://instagram.com/i_nydv?igshid=YmMyMTA2M2Y="
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="sidebarIcon fa-brands fa-instagram-square"></i>
+          </a>
         </div>
       </div>
     </div>

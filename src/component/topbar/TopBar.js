@@ -17,10 +17,27 @@ export default function TopBar() {
   return (
     <div className="top">
       <div className="topLeft">
-        <i className="topIcon fa-brands fa-facebook-square"></i>
-        <i className="topIcon fa-brands fa-twitter-square"></i>
-        <i className="topIcon fa-brands fa-pinterest-square"></i>
-        <i className="topIcon fa-brands fa-instagram-square"></i>
+        <a
+          href="https://www.facebook.com/Nitin9900"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="topIcon fa-brands fa-facebook-square"></i>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/lokesh-yadav-31318a225/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="topIcon fa-brands fa-linkedin"></i>
+        </a>
+        <a
+          href="https://instagram.com/i_nydv?igshid=YmMyMTA2M2Y="
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="topIcon fa-brands fa-instagram-square"></i>
+        </a>
       </div>
       <div className="topCenter">
         <ul className="topList">
