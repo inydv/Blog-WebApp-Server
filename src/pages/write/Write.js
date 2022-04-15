@@ -7,6 +7,7 @@ export default function Write() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
+  const [cat, setCat] = useState("");
   const user = useSelector((state) => state.currentUser);
 
   useEffect(() => {
@@ -19,6 +20,7 @@ export default function Write() {
       username: user.username,
       title,
       desc,
+      categories: cat,
     };
     if (file) {
       const data = new FormData();
@@ -59,6 +61,59 @@ export default function Write() {
             autoFocus={true}
             onChange={(e) => setTitle(e.target.value)}
           />
+        </div>
+        <div className="category">
+          <span className="categoryTitle">Category : </span>
+          <select className="select" onChange={(e) => setCat(e.target.value)}>
+            <option className="option" value="Food">
+              Food
+            </option>
+            <option className="option" value="Travel">
+              Travel
+            </option>
+            <option className="option" value="Health & Fitness">
+              Health & Fitness
+            </option>
+            <option className="option" value="Lifestyle">
+              Lifestyle
+            </option>
+            <option className="option" value="Fashion & Beauty">
+              Fashion & Beauty
+            </option>
+            <option className="option" value="Photography">
+              Photography
+            </option>
+            <option className="option" value="Personal">
+              Personal
+            </option>
+            <option className="option" value="Music">
+              Music
+            </option>
+            <option className="option" value="Business">
+              Business
+            </option>
+            <option className="option" value="Art & Design">
+              Art & Design
+            </option>
+            <option className="option" value="Book & Writing">
+              Book & Writing
+            </option>
+            <option className="option" value="Sports">
+              Sports
+            </option>
+            <option className="option" value="News">
+              News
+            </option>
+            <option className="option" value="Movie">
+              Movie
+            </option>
+            <option className="option" value="Religion">
+              Religion
+            </option>
+            <option className="option" value="Political">
+              Political
+            </option>
+          </select>
         </div>
         <div className="writeFormGroup">
           <textarea

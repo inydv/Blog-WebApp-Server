@@ -43,6 +43,22 @@
   outline: none;
 }
 
+.category {
+  margin-left: 170px;
+  color: gray;
+  font-size: 25px;
+}
+
+.select {
+  color: rgb(66, 66, 66);
+  font-size: 15px;
+  border: 1px solid gray;
+}
+
+.select:focus {
+  outline: none;
+}
+
 .writeText {
   font-size: 20px;
   height: 100vh;
