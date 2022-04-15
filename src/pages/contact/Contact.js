@@ -14,7 +14,7 @@ export default function Contact() {
     setTF(false);
     setTimeout(function () {
       window.location.replace("/");
-    }, 5000);
+    }, 2000);
   };
 
   return (

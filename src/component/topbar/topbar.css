@@ -23,7 +23,7 @@
 }
 
 .topIcon {
-  font: 20px;
+  font-size: 20px;
   margin-right: 10px;
   color: #444;
   cursor: pointer;
@@ -50,9 +50,27 @@
   cursor: pointer;
 }
 
-.topSearchIcon {
-  font-size: 18px;
-  color: #666;
-  cursor: pointer;
-  margin-left: 15px;
+@media only screen and (max-width: 800px) {
+  .topLeft,
+  .topRight {
+    padding: 0px 10px;
+  }
+
+  .topIcon {
+    font-size: 15px;
+    margin-right: 5px;
+  }
+
+  .topImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  .topListItem {
+    margin-right: 10px;
+    font-size: 15px;
+  }
 }

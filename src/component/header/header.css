@@ -28,3 +28,24 @@
   margin-top: 80px;
   object-fit: cover;
 }
+
+@media only screen and (max-width: 800px) {
+  .header {
+    margin-top: 15px;
+  }
+
+  .headerTitleSm {
+    top: 10%;
+    font-size: 15px;
+  }
+
+  .headerTitleLg {
+    top: 12%;
+    font-size: 60px;
+  }
+
+  .headerImg {
+    height: 200px;
+    margin-top: 50px;
+  }
+}

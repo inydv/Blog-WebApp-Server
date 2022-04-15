@@ -8,13 +8,8 @@ export default function Post({ post }) {
       {post.photo && <img src={ PF + post.photo} alt="" className="postImg" />}
 
       <div className="postInfo">
-        <div className="postCats">
-          {post.categories.map((item) => (
-            <span className="postCat">{item.name}</span>
-          ))}
-        </div>
         <Link to={`/post/${post._id}`} className="link">
-          <span className="postTitle">{post.title}</span>
+          <span className="postTitle">{post.title.slice(0,13)}</span>
         </Link>
         <hr />
         <span className="postDate">

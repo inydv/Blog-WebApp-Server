@@ -8,6 +8,7 @@
   height: 280px;
   object-fit: cover;
   border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .postInfo {
@@ -16,21 +17,10 @@
   align-items: center;
 }
 
-.postCat {
-  font-family: "Varela Round", sans-serif;
-  font-size: 11px;
-  color: #be9656;
-  line-height: 20px;
-  margin-top: 15px;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
 .postTitle {
   font-family: "Josefin Sans", sans-serif;
   font-size: 24px;
   font-weight: 700;
-  margin-top: 15px;
   cursor: pointer;
 }
 
@@ -53,4 +43,15 @@
   display: -webkit-box;
   -webkit-line-clamp: 4; /* number of lines */
   -webkit-box-orient: vertical;
+}
+
+@media only screen and (max-width: 800px) {
+  .post {
+    width: 170px;
+    margin: 0px 20px 40px 20px;
+  }
+
+  .postImg {
+    height: 150px;
+  }
 }
