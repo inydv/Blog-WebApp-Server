@@ -38,24 +38,10 @@ export default function Settings() {
     window.scrollTo(0, 0);
   }, []);
 
-  async function handleUpdate(postID) {
-    try {
-      await axios.put(`/posts/${postID}`, {
-        postId: postID,
-        username: username,
-      });
-    } catch (error) {}
-  }
-
-  function mapping(response) {
-    response.map((item) => {
-      handleUpdate(item._id);
-    });
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const updatedUser = {
+      findusername: currentUser,
       userId: user._id,
       username,
       email,
@@ -105,13 +91,11 @@ export default function Settings() {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             updatedUser.profilepic = downloadURL;
             update(dispatch, { ...updatedUser });
-              setWaiting(false);
+            setWaiting(false);
           });
         }
       );
     } else {
-      const response = await axios.get(`/posts/?user=${currentUser}`);
-      mapping(response.data);
       update(dispatch, { ...updatedUser });
     }
     // firebase End
