@@ -6,6 +6,17 @@ import axios from "axios";
 import { update } from "../../redux/apicall";
 import { signout } from "../../redux/apicall";
 
+// firebase Start
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+
+import { app } from "../../firebase";
+// firebase End
+
 export default function Settings() {
   const user = useSelector((state) => state.currentUser);
   const [file, setFile] = useState(null);
@@ -14,7 +25,9 @@ export default function Settings() {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-  const PF = "http://localhost:5000/images";
+
+  // Local Files
+  // const PF = "http://localhost:5000/images/";
 
   const { isFetching, error } = useSelector((state) => state);
 
@@ -30,17 +43,56 @@ export default function Settings() {
       email,
       password,
     };
+
+    // Local Files
+    // if (file) {
+    //   const data = new FormData();
+    //   const filename = Date.now() + file.name;
+    //   data.append("name", filename);
+    //   data.append("file", file);
+    //   updatedUser.profilepic = filename;
+
+    //   try {
+    //     await axios.post("/upload", data);
+    //   } catch (err) {}
+    // }
+
+    // Firebase Start
     if (file) {
-      const data = new FormData();
       const filename = Date.now() + file.name;
-      data.append("name", filename);
-      data.append("file", file);
-      updatedUser.profilepic = filename;
-      try {
-        await axios.post("/upload", data);
-      } catch (err) {}
+      const storage = getStorage(app);
+      const storageRef = ref(storage, filename);
+
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+            default:
+          }
+        },
+        (error) => {},
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            updatedUser.profilepic = downloadURL;
+            update(dispatch, { ...updatedUser });
+          });
+        }
+      );
+    } else {
+      update(dispatch, { ...updatedUser });
     }
-    update(dispatch, { ...updatedUser });
+    // firebase End
   };
 
   const handleDelete = async () => {
@@ -67,7 +119,11 @@ export default function Settings() {
             {file ? (
               <img src={URL.createObjectURL(file)} alt="" />
             ) : (
-              <img src={PF + user.profilepic} alt="" />
+              // Local Files
+              // <img src={PF + user.profilepic} alt="" />
+
+              // Firebase
+              <img src={user.profilepic} alt="" />
             )}
             <label htmlFor="FileInput">
               <i className="settingsPPIcon fa-solid fa-user"></i>

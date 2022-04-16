@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function Singlepost() {
-  const PF = "http://localhost:5000/images/";
+  // const PF = "http://localhost:5000/images/";
 
   const location = useLocation();
   const path = location.pathname.split("/")[2];
@@ -55,7 +55,8 @@ export default function Singlepost() {
     <div className="singlePost">
       <div className="singlePostWrapper">
         {post.photo && (
-          <img src={PF + post.photo} alt="" className="singlePostImg" />
+          // <img src={PF + post.photo} alt="" className="singlePostImg" />
+          <img src={post.photo} alt="" className="singlePostImg" />
         )}
         {updateMode ? (
           <input
