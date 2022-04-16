@@ -21,6 +21,8 @@ export default function Write() {
   const [cat, setCat] = useState("Food");
   const user = useSelector((state) => state.currentUser);
 
+  const [waiting, setWaiting] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -58,6 +60,7 @@ export default function Write() {
     // Firebase Start
     if (file) {
       const filename = Date.now() + file.name;
+      setWaiting(true);
       const storage = getStorage(app);
       const storageRef = ref(storage, filename);
 
@@ -178,9 +181,13 @@ export default function Write() {
             onChange={(e) => setDesc(e.target.value)}
           ></textarea>
         </div>
-        <button className="writeSubmit" type="submit">
-          Publish
-        </button>
+        {waiting ? (
+          <div className="writeSubmit wait">Publishing</div>
+        ) : (
+          <button className="writeSubmit" type="submit">
+            Publish
+          </button>
+        )}
       </form>
     </div>
   );

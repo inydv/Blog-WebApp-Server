@@ -82,9 +82,10 @@
   cursor: pointer;
 }
 
-.settingsSubmit:disabled {
+.wait {
   cursor: not-allowed;
-  color: teal;
+  background-color: red;
+  text-align: center;
 }
 
 @media only screen and (max-width: 800px) {

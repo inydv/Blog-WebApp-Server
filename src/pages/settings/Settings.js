@@ -23,6 +23,7 @@ export default function Settings() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [waiting, setWaiting] = useState(false);
 
   const currentUser = user.username;
 
@@ -37,19 +38,19 @@ export default function Settings() {
     window.scrollTo(0, 0);
   }, []);
 
-  async function handleUpdate(postID){
+  async function handleUpdate(postID) {
     try {
       await axios.put(`/posts/${postID}`, {
         postId: postID,
         username: username,
       });
     } catch (error) {}
-  };
+  }
 
   function mapping(response) {
     response.map((item) => {
-      handleUpdate(item._id)
-    })
+      handleUpdate(item._id);
+    });
   }
 
   const handleSubmit = async (e) => {
@@ -77,6 +78,7 @@ export default function Settings() {
     // Firebase Start
     if (file) {
       const filename = Date.now() + file.name;
+      setWaiting(true);
       const storage = getStorage(app);
       const storageRef = ref(storage, filename);
 
@@ -103,6 +105,7 @@ export default function Settings() {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             updatedUser.profilepic = downloadURL;
             update(dispatch, { ...updatedUser });
+              setWaiting(false);
           });
         }
       );
@@ -174,13 +177,19 @@ export default function Settings() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button
-            className="settingsSubmit"
-            type="submit"
-            disabled={isFetching}
-          >
-            Update
-          </button>
+          {waiting ? (
+            <div className="settingsSubmit wait">
+              Updating
+            </div>
+          ) : (
+            <button
+              className="settingsSubmit"
+              type="submit"
+              disabled={isFetching}
+            >
+              Update
+            </button>
+          )}
           {!error && (
             <span
               style={{ color: "green", textAlign: "center", marginTop: "20px" }}

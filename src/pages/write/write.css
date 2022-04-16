@@ -77,6 +77,11 @@
   font-size: 16px;
 }
 
+.wait {
+  cursor: not-allowed;
+  background-color: red;
+}
+
 @media only screen and (max-width: 800px) {
   .write {
     padding-top: 20px;
