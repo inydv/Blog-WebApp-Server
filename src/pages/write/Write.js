@@ -18,7 +18,7 @@ export default function Write() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
-  const [cat, setCat] = useState("");
+  const [cat, setCat] = useState("Food");
   const user = useSelector((state) => state.currentUser);
 
   useEffect(() => {
@@ -120,9 +120,6 @@ export default function Write() {
         <div className="category">
           <span className="categoryTitle">Category : </span>
           <select className="select" onChange={(e) => setCat(e.target.value)}>
-            <option className="option" value="select" disabled>
-              select
-            </option>
             <option className="option" value="Food">
               Food
             </option>

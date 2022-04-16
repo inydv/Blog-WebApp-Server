@@ -24,6 +24,8 @@ export default function Settings() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const currentUser = user.username;
+
   const dispatch = useDispatch();
 
   // Local Files
@@ -34,6 +36,21 @@ export default function Settings() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  async function handleUpdate(postID){
+    try {
+      await axios.put(`/posts/${postID}`, {
+        postId: postID,
+        username: username,
+      });
+    } catch (error) {}
+  };
+
+  function mapping(response) {
+    response.map((item) => {
+      handleUpdate(item._id)
+    })
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -90,6 +107,8 @@ export default function Settings() {
         }
       );
     } else {
+      const response = await axios.get(`/posts/?user=${currentUser}`);
+      mapping(response.data);
       update(dispatch, { ...updatedUser });
     }
     // firebase End
