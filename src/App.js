@@ -5,7 +5,7 @@ import Register from "./pages/register/Register";
 import Settings from "./pages/settings/Settings";
 import Single from "./pages/singlepage/Single";
 import Write from "./pages/write/Write";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import About from "./pages/about/About";
 import Contact from "./pages/contact/Contact";
@@ -15,32 +15,24 @@ function App() {
   return (
     <div className="App">
       <TopBar />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/post/:postId">
-          <Single />
-        </Route>
-        <Route exact path="/write">
-          {user ? <Write /> : <Register />}
-        </Route>
-        <Route exact path="/settings">
-          {user ? <Settings /> : <Register />}
-        </Route>
-        <Route exact path="/login">
-          {user ? <Home /> : <Login />}
-        </Route>
-        <Route exact path="/register">
-          {user ? <Home /> : <Register />}
-        </Route>
-        <Route exact path="/about">
-          <About />
-        </Route>
-        <Route exact path="/contact">
-          <Contact />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/post/:postId" element={<Single />} />
+        <Route exact path="/write" element={user ? <Write /> : <Register />} />
+        <Route
+          exact
+          path="/settings"
+          element={user ? <Settings /> : <Register />}
+        />
+        <Route exact path="/login" element={user ? <Home /> : <Login />} />
+        <Route
+          exact
+          path="/register"
+          element={user ? <Home /> : <Register />}
+        />
+        <Route exact path="/about" element={<About />} />
+        <Route exact path="/contact" element={<Contact />} />
+      </Routes>
     </div>
   );
 }
