@@ -3,6 +3,8 @@ import "./singlepost.css";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { getStorage, ref, deleteObject } from "firebase/storage";
+import { app } from "../../firebase";
 
 export default function Singlepost() {
   // const PF = "http://localhost:5000/images/";
@@ -30,9 +32,26 @@ export default function Singlepost() {
   }, [path]);
 
   const user = useSelector((state) => state.currentUser);
-
+  
+  
   const handleDelete = async () => {
     try {
+      if (post.photo) {
+        let pic_name = post.photo.split("/")[7].split("?")[0].split('%20').join(' ');
+        const storage = getStorage(app);
+
+        // Create a reference to the file to delete
+        const desertRef = ref(storage, pic_name);
+
+        // Delete the file
+        deleteObject(desertRef)
+          .then(() => {
+            console.log("Deleted");
+          })
+          .catch((error) => {
+            console.log("Uh-oh, an error occurred!");
+          });
+      }
       await axios.delete(`/posts/${post._id}`, {
         data: { username: user.username },
       });
