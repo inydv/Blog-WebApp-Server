@@ -22,7 +22,7 @@ export default function Singlepost() {
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get(`http://localhost:5000/api/posts/${path}`, {
+      const res = await axios.get(`posts/${path}`, {
         data: {
           username: user.username,
         },
@@ -52,7 +52,7 @@ export default function Singlepost() {
             console.log("Uh-oh, an error occurred!");
           });
       }
-      await axios.delete(`http://localhost:5000/api/posts/${post._id}`, {
+      await axios.delete(`posts/${post._id}`, {
         data: { username: user.username },
       });
       window.location.replace("/");
@@ -61,7 +61,7 @@ export default function Singlepost() {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`http://localhost:5000/api/posts/${post._id}`, {
+      await axios.put(`posts/${post._id}`, {
         username: user.username,
         title: title, // title
         desc: desc, // desc

@@ -57,7 +57,7 @@ export default function Settings() {
     //   updatedUser.profilepic = filename;
 
     //   try {
-    //     await axios.post("http://localhost:5000/api/upload", data);
+    //     await axios.post("upload", data);
     //   } catch (err) {}
     // }
 
@@ -103,7 +103,7 @@ export default function Settings() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/user/${user._id}`, {
+      await axios.delete(`user/${user._id}`, {
         data: { userId: user._id },
       });
       signout(dispatch);
