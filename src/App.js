@@ -12,6 +12,7 @@ import Contact from "./pages/contact/Contact";
 
 function App() {
   const user = useSelector((state) => state.currentUser);
+
   return (
     <div className="App">
       <TopBar />

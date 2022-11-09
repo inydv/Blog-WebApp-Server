@@ -57,7 +57,7 @@ export default function Settings() {
     //   updatedUser.profilepic = filename;
 
     //   try {
-    //     await axios.post("/upload", data);
+    //     await axios.post("http://localhost:5000/api/upload", data);
     //   } catch (err) {}
     // }
 
@@ -86,7 +86,7 @@ export default function Settings() {
             default:
           }
         },
-        (error) => {},
+        (error) => { },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             updatedUser.profilepic = downloadURL;
@@ -103,11 +103,11 @@ export default function Settings() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/user/${user._id}`, {
+      await axios.delete(`http://localhost:5000/api/user/${user._id}`, {
         data: { userId: user._id },
       });
       signout(dispatch);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (

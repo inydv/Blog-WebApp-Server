@@ -28,7 +28,7 @@ export default function Write() {
   }, []);
 
   async function post(newPost) {
-    const res = await axios.post("/posts", newPost);
+    const res = await axios.post("http://localhost:5000/api/posts", newPost);
     window.location.replace("/post/" + res.data._id);
   }
 
@@ -49,11 +49,11 @@ export default function Write() {
     //   data.append("file", file);
     //   newPost.photo = filename;
     //   try {
-    //     await axios.post("/upload", data);
+    //     await axios.post("http://localhost:5000/api/upload", data);
     //   } catch (err) {}
     // }
     // try {
-    //   const res = await axios.post("/posts", newPost);
+    //   const res = await axios.post("http://localhost:5000/api/posts", newPost);
     //   window.location.replace("/post/" + res.data._id);
     // } catch (err) {}
 
@@ -82,7 +82,7 @@ export default function Write() {
             default:
           }
         },
-        (error) => {},
+        (error) => { },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             newPost.photo = downloadURL;
