@@ -19,12 +19,11 @@ export default function Singlepost() {
 
   const user = useSelector((state) => state.currentUser);
 
-
   useEffect(() => {
     const getPost = async () => {
       const res = await axios.get(`posts/${path}`, {
         data: {
-          username: user.username,
+          username: user?.username,
         },
       });
       setPost(res.data);
@@ -32,7 +31,7 @@ export default function Singlepost() {
       setDesc(res.data.desc);
     };
     getPost();
-  }, [path, user.username]);
+  }, [path, user?.username]);
 
   const handleDelete = async () => {
     try {
