@@ -8,7 +8,7 @@ export default function Sidebar() {
 
   useEffect(() => {
     const getCats = async () => {
-      const res = await axios.get("https://bloogg.herokuapp.com/api/categories");
+      const res = await axios.get("/api/categories");
       setCats(res.data);
     };
     getCats();

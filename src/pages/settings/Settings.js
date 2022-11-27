@@ -30,7 +30,7 @@ export default function Settings() {
   const dispatch = useDispatch();
 
   // Local Files
-  // const PF = "https://bloogg.herokuapp.com/images/";
+  // const PF = "/images/";
 
   const { isFetching, error } = useSelector((state) => state);
 
@@ -57,7 +57,7 @@ export default function Settings() {
     //   updatedUser.profilepic = filename;
 
     //   try {
-    //     await axios.post("https://bloogg.herokuapp.com/api/upload", data);
+    //     await axios.post("/api/upload", data);
     //   } catch (err) {}
     // }
 
@@ -103,7 +103,7 @@ export default function Settings() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://bloogg.herokuapp.com/api/user/${user._id}`, {
+      await axios.delete(`/api/user/${user._id}`, {
         data: { userId: user._id },
       });
       signout(dispatch);

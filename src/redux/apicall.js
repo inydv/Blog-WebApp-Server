@@ -12,7 +12,7 @@ import axios from "axios";
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
-    const res = await axios.post("https://bloogg.herokuapp.com/api/auth/login", user);
+    const res = await axios.post("/api/auth/login", user);
     dispatch(loginOrder(res.data));
   } catch (err) {
     dispatch(loginFailure());
@@ -26,7 +26,7 @@ export const signout = (dispatch) => {
 export const update = async (dispatch, user) => {
   dispatch(updateStart());
   try {
-    const res = await axios.put(`https://bloogg.herokuapp.com/api/user/${user.userId}`, user);
+    const res = await axios.put(`/api/user/${user.userId}`, user);
     dispatch(updateOrder(res.data));
   } catch (err) {
     dispatch(updateFailure());
