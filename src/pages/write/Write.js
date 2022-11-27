@@ -28,7 +28,7 @@ export default function Write() {
   }, []);
 
   async function post(newPost) {
-    const res = await axios.post("http://localhost:5000/api/posts", newPost);
+    const res = await axios.post("https://bloogg.herokuapp.com/api/posts", newPost);
     window.location.replace("/post/" + res.data._id);
   }
 
@@ -53,7 +53,7 @@ export default function Write() {
     //   } catch (err) {}
     // }
     // try {
-    //   const res = await axios.post("http://localhost:5000/api/posts", newPost);
+    //   const res = await axios.post("https://bloogg.herokuapp.com/api/posts", newPost);
     //   window.location.replace("/post/" + res.data._id);
     // } catch (err) {}
 

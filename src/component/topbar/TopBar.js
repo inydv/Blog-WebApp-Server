@@ -10,7 +10,7 @@ export default function TopBar() {
   const dispatch = useDispatch();
 
   // Local Files
-  // const PF = "http://localhost:5000/images/";
+  // const PF = "https://bloogg.herokuapp.com/images/";
 
   const handleLogout = () => {
     signout(dispatch);
