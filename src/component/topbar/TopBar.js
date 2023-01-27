@@ -9,8 +9,7 @@ export default function TopBar() {
 
   const dispatch = useDispatch();
 
-  // Local Files
-  // const PF = "/images/";
+  const PF = "http://localhost:5000/images/";
 
   const handleLogout = () => {
     signout(dispatch);
@@ -72,11 +71,11 @@ export default function TopBar() {
         {user ? (
           user.profilepic ? (
             <Link to="/settings">
-              <img className="topImg" src={user.profilepic} alt="" />
+              <img className="topImg" src={PF + user.profilepic} alt="" />
             </Link>
           ) : (
             <Link to="/settings">
-              <i className="fa-solid fa-user" style={{ cursor: "pointer" }}></i>
+              <i className="fa-solid fa-user" style={{ cursor: "pointer", color: "black" }}></i>
             </Link>
           )
         ) : (

@@ -1,6 +1,8 @@
 import "./header.css";
 
 export default function Header() {
+  const PF = "http://localhost:5000/images/";
+
   return (
     <div className="header">
       <div className="headerTitles">
@@ -9,7 +11,7 @@ export default function Header() {
       </div>
       <img
         className="headerImg"
-        src="https://newevolutiondesigns.com/images/freebies/cool-4k-wallpaper-2.jpg"
+        src={PF + "banner.jpg"}
         alt=""
       />
     </div>

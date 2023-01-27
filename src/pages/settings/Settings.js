@@ -5,34 +5,25 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { update } from "../../redux/apicall";
 import { signout } from "../../redux/apicall";
-
-// firebase Start
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
-
-import { app } from "../../firebase";
-// firebase End
+import { ThreeDots } from 'react-loader-spinner';
 
 export default function Settings() {
   const user = useSelector((state) => state.currentUser);
   const [file, setFile] = useState(null);
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState(user?.username);
+  const [email, setEmail] = useState(user?.email);
+  const [password, setPassword] = useState();
   const [waiting, setWaiting] = useState(false);
+
+  const style = { position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" };
 
   const currentUser = user.username;
 
   const dispatch = useDispatch();
 
-  // Local Files
-  // const PF = "/images/";
+  const PF = "http://localhost:5000/images/";
 
-  const { isFetching, error } = useSelector((state) => state);
+  const { isFetching } = useSelector((state) => state);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -40,6 +31,7 @@ export default function Settings() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setWaiting(true);
     const updatedUser = {
       findusername: currentUser,
       userId: user._id,
@@ -49,141 +41,113 @@ export default function Settings() {
     };
 
     // Local Files
-    // if (file) {
-    //   const data = new FormData();
-    //   const filename = Date.now() + file.name;
-    //   data.append("name", filename);
-    //   data.append("file", file);
-    //   updatedUser.profilepic = filename;
-
-    //   try {
-    //     await axios.post("/api/upload", data);
-    //   } catch (err) {}
-    // }
-
-    // Firebase Start
     if (file) {
+      const data = new FormData();
       const filename = Date.now() + file.name;
-      setWaiting(true);
-      const storage = getStorage(app);
-      const storageRef = ref(storage, filename);
+      data.append("name", filename);
+      data.append("file", file);
+      updatedUser.profilepic = filename;
 
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
-              break;
-            case "running":
-              console.log("Upload is running");
-              break;
-            default:
-          }
-        },
-        (error) => { },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            updatedUser.profilepic = downloadURL;
-            update(dispatch, { ...updatedUser });
-            setWaiting(false);
-          });
-        }
-      );
-    } else {
+      try {
+        await axios.post("http://localhost:5000/api/upload", data);
+      } catch (err) { }
+    } try {
       update(dispatch, { ...updatedUser });
-    }
-    // firebase End
+    } catch (err) { }
+    setWaiting(false);
   };
 
   const handleDelete = async () => {
+    setWaiting(true);
     try {
-      await axios.delete(`/api/user/${user._id}`, {
+      if (user.profilepic) {
+        await axios.delete(`http://localhost:5000/api/delete/${user.profilepic}`);
+      }
+      await axios.delete(`http://localhost:5000/api/user/${user._id}`, {
         data: { userId: user._id },
       });
       signout(dispatch);
     } catch (error) { }
+    setWaiting(true);
   };
 
   return (
-    <div className="settings">
-      <div className="settingsWrapper">
-        <div className="settingsTitle">
-          <span className="settingsUpdateTitle">Update Your Account</span>
-          <span className="settingsDeleteTitle" onClick={handleDelete}>
-            Delete Account
-          </span>
-        </div>
-        <form className="settingsForm" onSubmit={handleSubmit}>
-          <label>Profile Picture</label>
-          <div className="settingsPP">
-            {file ? (
-              <img src={URL.createObjectURL(file)} alt="" />
-            ) : (
-              // Local Files
-              // <img src={PF + user.profilepic} alt="" />
-
-              // Firebase
-              <img src={user.profilepic} alt="" />
-            )}
-            <label htmlFor="FileInput">
-              <i className="settingsPPIcon fa-solid fa-user"></i>
-            </label>
-            <input
-              type="file"
-              id="FileInput"
-              style={{ display: "none" }}
-              onChange={(e) => setFile(e.target.files[0])}
-            />
-          </div>
-          <label>Username</label>
-          <input
-            type="text"
-            placeholder={user.username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-          <label>Email</label>
-          <input
-            type="email"
-            placeholder={user.email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <label>Password</label>
-          <input
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          {waiting ? (
-            <div className="settingsSubmit wait">
-              Updating
-            </div>
-          ) : (
-            <button
-              className="settingsSubmit"
-              type="submit"
-              disabled={isFetching}
-            >
-              Update
-            </button>
-          )}
-          {!error && (
-            <span
-              style={{ color: "green", textAlign: "center", marginTop: "20px" }}
-            >
-              Profile has been updated...
+    <>
+      {isFetching || waiting? <div style={style} >
+        <ThreeDots
+          height="80"
+          width="80"
+          radius="9"
+          color="#000000"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClassName=""
+          visible={true}
+        />
+      </div> : <div className="settings">
+        <div className="settingsWrapper">
+          <div className="settingsTitle">
+            <span className="settingsUpdateTitle">Update Your Account</span>
+            <span className="settingsDeleteTitle" onClick={handleDelete}>
+              Delete Account
             </span>
-          )}
-        </form>
-      </div>
-      <Sidebar />
-    </div>
+          </div>
+          <form className="settingsForm" onSubmit={handleSubmit}>
+            <label>Profile Picture</label>
+            <div className="settingsPP">
+              {file ? (
+                <img src={URL.createObjectURL(file)} alt="" />
+              ) : (
+                <img src={PF + user.profilepic} alt="" />
+              )}
+              <label htmlFor="FileInput">
+                <i className="settingsPPIcon fa-solid fa-user"></i>
+              </label>
+              <input
+                type="file"
+                id="FileInput"
+                style={{ display: "none" }}
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+            </div>
+            <label>Username</label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            {waiting ? (
+              <div className="settingsSubmit wait">
+                Updating
+              </div>
+            ) : (
+              <button
+                className="settingsSubmit"
+                type="submit"
+                disabled={isFetching}
+              >
+                Update
+              </button>
+            )}
+          </form>
+        </div>
+        <Sidebar />
+      </div>}
+    </>
   );
 }
