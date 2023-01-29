@@ -18,7 +18,7 @@ export default function Home() {
     window.scrollTo(0, 0);
     const fetchPosts = async () => {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/posts" + search);
+      const res = await axios.get("https://blogg-server.onrender.com/api/posts" + search);
       setPosts(res.data);
       setLoading(false);
     };

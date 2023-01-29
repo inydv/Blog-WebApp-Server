@@ -1,7 +1,7 @@
 import "./header.css";
 
 export default function Header() {
-  const PF = "http://localhost:5000/images/";
+  const PF = "https://blogg-server.onrender.com/images/";
 
   return (
     <div className="header">

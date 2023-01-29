@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { ThreeDots } from 'react-loader-spinner';
 
 export default function Singlepost() {
-  const PF = "http://localhost:5000/images/";
+  const PF = "https://blogg-server.onrender.com/images/";
 
   const location = useLocation();
   const path = location.pathname.split("/")[2];
@@ -24,7 +24,7 @@ export default function Singlepost() {
   useEffect(() => {
     const getPost = async () => {
       setWaiting(true);
-      const res = await axios.get(`http://localhost:5000/api/posts/${path}`, {
+      const res = await axios.get(`https://blogg-server.onrender.com/api/posts/${path}`, {
         data: {
           username: user?.username,
         },
@@ -41,9 +41,9 @@ export default function Singlepost() {
     setWaiting(true);
     try {
       if (post.photo) {
-        await axios.delete(`http://localhost:5000/api/delete/${post.photo}`);
+        await axios.delete(`https://blogg-server.onrender.com/api/delete/${post.photo}`);
       }
-      await axios.delete(`http://localhost:5000/api/posts/${post._id}`, {
+      await axios.delete(`https://blogg-server.onrender.com/api/posts/${post._id}`, {
         data: { username: user.username },
       });
       window.location.replace("/");
@@ -54,7 +54,7 @@ export default function Singlepost() {
   const handleUpdate = async () => {
     setWaiting(true);
     try {
-      await axios.put(`http://localhost:5000/api/posts/${post._id}`, {
+      await axios.put(`https://blogg-server.onrender.com/api/posts/${post._id}`, {
         username: user.username,
         title: title, // title
         desc: desc, // desc

@@ -13,7 +13,7 @@ export default function Sidebar() {
   useEffect(() => {
     const getCats = async () => {
       setWaiting(true);
-      const res = await axios.get("http://localhost:5000/api/categories");
+      const res = await axios.get("https://blogg-server.onrender.com/api/categories");
       setCats(res.data);
       setWaiting(false);
     };

@@ -21,7 +21,7 @@ export default function Settings() {
 
   const dispatch = useDispatch();
 
-  const PF = "http://localhost:5000/images/";
+  const PF = "https://blogg-server.onrender.com/images/";
 
   const { isFetching } = useSelector((state) => state);
 
@@ -49,7 +49,7 @@ export default function Settings() {
       updatedUser.profilepic = filename;
 
       try {
-        await axios.post("http://localhost:5000/api/upload", data);
+        await axios.post("https://blogg-server.onrender.com/api/upload", data);
       } catch (err) { }
     } try {
       update(dispatch, { ...updatedUser });
@@ -61,9 +61,9 @@ export default function Settings() {
     setWaiting(true);
     try {
       if (user.profilepic) {
-        await axios.delete(`http://localhost:5000/api/delete/${user.profilepic}`);
+        await axios.delete(`https://blogg-server.onrender.com/api/delete/${user.profilepic}`);
       }
-      await axios.delete(`http://localhost:5000/api/user/${user._id}`, {
+      await axios.delete(`https://blogg-server.onrender.com/api/user/${user._id}`, {
         data: { userId: user._id },
       });
       signout(dispatch);
